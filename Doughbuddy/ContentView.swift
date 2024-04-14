@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
-    @EnvironmentObject var book : RecipeBook
+//    @EnvironmentObject var book : RecipeBook
+    @Query(sort: \Recipe.name) var book: [Recipe]
     var body: some View {
         
         NavigationStack{
             List{
-                ForEach(book.recipes) { recipe in
+                ForEach(book) { recipe in
                     NavigationLink {
                         RecipeDetail(recipe: recipe)
                             .navigationTitle(recipe.name)
@@ -21,13 +23,22 @@ struct ContentView: View {
                         RecipeRow(recipe: recipe)
                     }
                     
+                    
                 }
             }
+            NavigationLink(destination: EditRecipeDatabaseView(book: book)) {
+                Text("Edit Recipe Database")
+            }.padding()
         }
-    }
         
-}
+        
+        
+    };
+    
 
-#Preview {
-    ContentView().environmentObject(RecipeBook())
-}
+        }
+
+/* #Preview {
+ ContentView().environmentObject(RecipeBook())
+ }
+ */

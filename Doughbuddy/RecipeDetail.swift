@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftData
 
 struct RecipeDetail: View {
     var recipe: Recipe
@@ -24,30 +25,29 @@ struct RecipeDetail: View {
     
     var body: some View {
         VStack {
-            Text(recipe.recipeSteps[currentStepIndex].description).padding()
+            Text(recipe.recipeSteps[currentStepIndex].stepFollow).padding()
             
             // Show start timer button if the current step has a timer duration and timer is not active
             if let timerDuration = recipe.recipeSteps[currentStepIndex].timerDuration, !timerIsActive {
-                Button("Start Timer") {
-                    startTimer(duration: timerDuration)
-                }.padding()
-            }
+                Button("Start Timer With Temperature") {
+                          startTimerPrompt()
+                      }
+                  
+                  .sheet(isPresented: $showingInputView) {
+                      TemperatureInputView(inputTemperature: $inputTemperature, showing: $showingInputView)
+                          .onDisappear {
+                              startTimerWithInput()
+                          }
+                  }
+                  .alert(isPresented: $showAlert) {
+                      Alert(title: Text("Error"), message: Text("Please enter a valid number for the temperature."), dismissButton: .default(Text("OK")))
+                  }
+                }
+            
             
             //Need a better formula to calculate rising time
             
-          Button("Start Timer With Temperature") {
-                    startTimerPrompt()
-                }
-            
-            .sheet(isPresented: $showingInputView) {
-                TemperatureInputView(inputTemperature: $inputTemperature, showing: $showingInputView)
-                    .onDisappear {
-                        startTimerWithInput()
-                    }
-            }
-            .alert(isPresented: $showAlert) {
-                Alert(title: Text("Error"), message: Text("Please enter a valid number for the temperature."), dismissButton: .default(Text("OK")))
-            }
+          
 
             
             // Timer display, only shown if timer is active
@@ -143,9 +143,9 @@ struct RecipeDetail: View {
     
      
 
-struct RecipeDetail_Previews: PreviewProvider {
+/* struct RecipeDetail_Previews: PreviewProvider {
     static var previews: some View {
-        RecipeDetail(recipe: RecipeBook().recipes.randomElement() ?? Recipe(name: "Test recipe", stepsNumber: "4", recipeSteps: [recipeStep(description: "nothing here", timerDuration: nil) ], recipeIngred: "None"))
+        RecipeDetail(recipe: RecipeBook().recipes.randomElement() ?? Recipe(name: "Test recipe", stepsNumber: "4", recipeSteps: [recipeStep(stepFollow: "nothing here", timerDuration: nil) ], recipeIngred: "None"))
     }
 }
-
+*/

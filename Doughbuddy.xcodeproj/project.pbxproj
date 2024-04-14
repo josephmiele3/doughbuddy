@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C44BE442BCB7AA500C2604B /* EditRecipeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44BE432BCB7AA500C2604B /* EditRecipeView.swift */; };
+		7C44BE482BCB8A8F00C2604B /* EditRecipeDatabaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C44BE472BCB8A8F00C2604B /* EditRecipeDatabaseView.swift */; };
 		7C6A03262BA7D66900E41429 /* TemperatureInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C6A03252BA7D66900E41429 /* TemperatureInputView.swift */; };
 		7CC9D8042B6AD3DB0029DFAE /* DoughbuddyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9D8032B6AD3DB0029DFAE /* DoughbuddyApp.swift */; };
 		7CC9D8082B6AD3DB0029DFAE /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC9D8072B6AD3DB0029DFAE /* Item.swift */; };
@@ -39,6 +41,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C44BE432BCB7AA500C2604B /* EditRecipeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeView.swift; sourceTree = "<group>"; };
+		7C44BE472BCB8A8F00C2604B /* EditRecipeDatabaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecipeDatabaseView.swift; sourceTree = "<group>"; };
 		7C6A03252BA7D66900E41429 /* TemperatureInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TemperatureInputView.swift; sourceTree = "<group>"; };
 		7CC9D8002B6AD3DB0029DFAE /* Doughbuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Doughbuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7CC9D8032B6AD3DB0029DFAE /* DoughbuddyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoughbuddyApp.swift; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 				7CFD93B12B6F48BB006E1FB6 /* RecipeRow.swift */,
 				7C6A03252BA7D66900E41429 /* TemperatureInputView.swift */,
 				7CFD93B52B6F4954006E1FB6 /* RecipeDetail.swift */,
+				7C44BE432BCB7AA500C2604B /* EditRecipeView.swift */,
+				7C44BE472BCB8A8F00C2604B /* EditRecipeDatabaseView.swift */,
 				7CC9D8092B6AD3DE0029DFAE /* Assets.xcassets */,
 				7CC9D80B2B6AD3DE0029DFAE /* Doughbuddy.entitlements */,
 				7CC9D80C2B6AD3DE0029DFAE /* Preview Content */,
@@ -274,9 +280,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C44BE442BCB7AA500C2604B /* EditRecipeView.swift in Sources */,
 				7CC9D8082B6AD3DB0029DFAE /* Item.swift in Sources */,
 				7CFD93B42B6F48E6006E1FB6 /* RecipeBook.swift in Sources */,
 				7CFD93B82B6F4E25006E1FB6 /* ContentView.swift in Sources */,
+				7C44BE482BCB8A8F00C2604B /* EditRecipeDatabaseView.swift in Sources */,
 				7CFD93B22B6F48BB006E1FB6 /* RecipeRow.swift in Sources */,
 				7C6A03262BA7D66900E41429 /* TemperatureInputView.swift in Sources */,
 				7CFD93B62B6F4954006E1FB6 /* RecipeDetail.swift in Sources */,

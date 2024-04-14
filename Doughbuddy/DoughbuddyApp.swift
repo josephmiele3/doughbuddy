@@ -10,8 +10,8 @@ import SwiftData
 
 @main
 struct DoughbuddyApp: App {
-    @StateObject var recipebook = RecipeBook()
-    var sharedModelContainer: ModelContainer = {
+  //  @StateObject var recipebook = RecipeBook()
+ /*   var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
         ])
@@ -23,13 +23,13 @@ struct DoughbuddyApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
+*/
     var body: some Scene {
         WindowGroup {
             ContentView()
         }
-        .environmentObject(recipebook)
-        .modelContainer(sharedModelContainer)
+      //  .environmentObject(recipebook)
+        .modelContainer(for: Recipe.self)
         
 
     }
