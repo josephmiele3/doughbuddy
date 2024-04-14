@@ -13,7 +13,7 @@ struct EditRecipeDatabaseView: View {
     var body: some View {
         
         
-        NavigationStack{
+        NavigationStack(){
             List{
                 ForEach(book) { recipe in
                     NavigationLink {
@@ -24,14 +24,14 @@ struct EditRecipeDatabaseView: View {
                     }
                     
                     
-                }.onDelete(perform: deleteRecipes)
-            }.toolbar {Button("Test", action:addsamples)}
+                }.onDelete(perform: deleteRecipes);
+            }.toolbar {Button("Add a Recipe", systemImage: "plus", action:addRecipe)}
             
         }
     };
-    func addsamples(){
-        let testrecipe = Recipe(name: "test", stepsNumber: "4", recipeSteps: [recipeStep(stepFollow: "", timerDuration: 40, stepOrder: 0)], recipeIngred: "2")
-        modelContext.insert(testrecipe)
+    func addRecipe(){
+        let recipe = Recipe(name: "New Recipe", stepsNumber: "4", recipeSteps: [], recipeIngred: "2")
+        modelContext.insert(recipe)
     }
     func deleteRecipes(indexSet: IndexSet){
         for index in indexSet {
