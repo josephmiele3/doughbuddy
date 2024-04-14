@@ -29,7 +29,7 @@ struct DoughbuddyApp: App {
             ContentView()
         }
       //  .environmentObject(recipebook)
-        .modelContainer(for: Recipe.self)
+        .modelContainer(for: [Recipe.self, recipeStep.self])
         
 
     }

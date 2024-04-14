@@ -22,10 +22,15 @@ struct RecipeDetail: View {
     @State private var inputTemperature: String = ""
     @State private var showAlert = false
 
+    //SwiftData is so bad holy moly
+    private var sortedSteps: [recipeStep]{
+        recipe.recipeSteps.sorted(by: {$0.stepOrder < $1.stepOrder})
+    }
     
     var body: some View {
         VStack {
-            Text(recipe.recipeSteps[currentStepIndex].stepFollow).padding()
+            Text(sortedSteps[currentStepIndex].stepFollow).padding()
+            Text("help \(sortedSteps[currentStepIndex].stepOrder)")
             
             // Show start timer button if the current step has a timer duration and timer is not active
             if let timerDuration = recipe.recipeSteps[currentStepIndex].timerDuration, !timerIsActive {

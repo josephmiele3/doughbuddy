@@ -30,7 +30,7 @@ struct EditRecipeDatabaseView: View {
         }
     };
     func addsamples(){
-        let testrecipe = Recipe(name: "test", stepsNumber: "4", recipeSteps: [recipeStep(stepFollow: "", timerDuration: 40)], recipeIngred: "2")
+        let testrecipe = Recipe(name: "test", stepsNumber: "4", recipeSteps: [recipeStep(stepFollow: "", timerDuration: 40, stepOrder: 0)], recipeIngred: "2")
         modelContext.insert(testrecipe)
     }
     func deleteRecipes(indexSet: IndexSet){

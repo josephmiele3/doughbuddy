@@ -32,17 +32,21 @@ struct EditRecipeView: View {
     
     func addStep(){
         guard newStepText.isEmpty == false else {return}
+        var coolvar = 0
+
         if let duration = TimeInterval(timerDurationText) {
-            let newstep = recipeStep(stepFollow: newStepText, timerDuration: duration)
+            let newstep = recipeStep(stepFollow: newStepText, timerDuration: duration, stepOrder: coolvar + 1)
             recipe.recipeSteps.insert(newstep, at: recipe.recipeSteps.endIndex)
             newStepText = ""
             timerDurationText = ""
+            coolvar = coolvar + 1
         } else {
             print("Invalid duration input")
-            let newstep = recipeStep(stepFollow: newStepText, timerDuration: nil)
+            let newstep = recipeStep(stepFollow: newStepText, timerDuration: nil, stepOrder: coolvar + 1)
             recipe.recipeSteps.insert(newstep, at: recipe.recipeSteps.endIndex)
             newStepText = ""
             timerDurationText = ""
+            coolvar = coolvar + 1
         }
         
     }
