@@ -36,7 +36,7 @@ class recipeStep {
     init(stepFollow: String, timerDuration: TimeInterval? = nil, stepOrder: Int) {
         self.stepFollow = stepFollow
         self.timerDuration = timerDuration
-        self.stepOrder = 1
+        self.stepOrder = stepOrder
     }
 }
 

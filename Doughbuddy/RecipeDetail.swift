@@ -33,7 +33,7 @@ struct RecipeDetail: View {
             Text("help \(sortedSteps[currentStepIndex].stepOrder)")
             
             // Show start timer button if the current step has a timer duration and timer is not active
-            if let timerDuration = recipe.recipeSteps[currentStepIndex].timerDuration, !timerIsActive {
+            if let timerDuration = sortedSteps[currentStepIndex].timerDuration, !timerIsActive {
                 Button("Start Timer With Temperature") {
                           startTimerPrompt()
                       }
