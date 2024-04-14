@@ -13,7 +13,6 @@ struct EditRecipeView: View {
     @Bindable var recipe : Recipe
     @State private var newStepText = ""
     @State private var timerDurationText = ""
-    @State var coolvar1 = ""
 
     var body: some View {
         
@@ -24,7 +23,6 @@ struct EditRecipeView: View {
                     TextField("Enter step \(recipe.recipeSteps.count + 1) for the recipe.", text: $newStepText)
                     TextField("If this step requires a timer, enter one here. If not, leave blank.", text: $timerDurationText)
                     //.keyboardType(.numberPad)
-                    TextField("manually increment this by 1", text: $coolvar1)
                     Button("Add Step", action: addStep)
                 }
             }
@@ -36,7 +34,7 @@ struct EditRecipeView: View {
     func addStep() {
         guard !newStepText.isEmpty else { return }
 
-        // Determine the maximum stepOrder currently in recipeSteps
+        //uuugh
         let maxStepOrder = recipe.recipeSteps.map { $0.stepOrder }.max() ?? 0
         let newStepOrder = maxStepOrder + 1
 
