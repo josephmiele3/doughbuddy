@@ -10,7 +10,7 @@ import SwiftUI
 import SwiftData
 
 struct RecipeDetail: View {
-    var recipe: Recipe
+    @Bindable var recipe: Recipe
     
     @State private var currentStepIndex = 0
     
@@ -27,33 +27,41 @@ struct RecipeDetail: View {
         recipe.recipeSteps.sorted(by: {$0.stepOrder < $1.stepOrder})
     }
     
+    @State private var showingRatingView = false
+    @State private var inputComment: String = ""
+    @State private var inputRating: Int = 0
+    
     var body: some View {
         VStack {
-            Text(sortedSteps[currentStepIndex].stepFollow).padding()
-            Text("help \(sortedSteps[currentStepIndex].stepOrder)")
+            if currentStepIndex < sortedSteps.count {
+                Text(sortedSteps[currentStepIndex].stepFollow).padding()
+                Text("Step \(sortedSteps[currentStepIndex].stepOrder)")
+
+            }
+            
+            
+            
+            
             
             // Show start timer button if the current step has a timer duration and timer is not active
             if let timerDuration = sortedSteps[currentStepIndex].timerDuration, !timerIsActive {
                 Button("Start Timer With Temperature") {
-                          startTimerPrompt()
-                      }
-                  
-                  .sheet(isPresented: $showingInputView) {
-                      TemperatureInputView(inputTemperature: $inputTemperature, showing: $showingInputView)
-                          .onDisappear {
-                              startTimerWithInput()
-                          }
-                  }
-                  .alert(isPresented: $showAlert) {
-                      Alert(title: Text("Error"), message: Text("Please enter a valid number for the temperature."), dismissButton: .default(Text("OK")))
-                  }
+                    startTimerPrompt()
                 }
+                
+                .sheet(isPresented: $showingInputView) {
+                    TemperatureInputView(inputTemperature: $inputTemperature, showing: $showingInputView)
+                        .onDisappear {
+                            startTimerWithInput()
+                        }
+                }
+                .alert(isPresented: $showAlert) {
+                    Alert(title: Text("Error"), message: Text("Please enter a valid number for the temperature."), dismissButton: .default(Text("OK")))
+                }
+            }
             
             
-            //Need a better formula to calculate rising time
             
-          
-
             
             // Timer display, only shown if timer is active
             if timerIsActive {
@@ -75,12 +83,35 @@ struct RecipeDetail: View {
                 Button("Previous") {
                     goToPreviousStep()
                 }.padding()
-                .disabled(currentStepIndex == 0) // Disable if on the first step
+                    .disabled(currentStepIndex == 0) // Disable if on the first step
                 Spacer()
                 Button("Next") {
                     goToNextStep()
                 }.padding()
-                .disabled(currentStepIndex >= recipe.recipeSteps.count - 1) // Disable if on the last step
+                    .disabled(currentStepIndex >= recipe.recipeSteps.count - 1) // Disable if on the last step
+            }
+            VStack{
+                Button("Show Comment") {
+                    if currentStepIndex >= sortedSteps.count - 1 {
+                        // Last step, show view for comment and rating
+                        showingRatingView = true
+                    }
+                }.padding()
+                    .disabled(currentStepIndex < sortedSteps.count - 1)
+            }
+            // Display input view at the last step
+            if showingRatingView {
+                VStack {
+                    TextField("Enter your comment", text: $recipe.recipeIngred).padding()
+                    Picker("Rating", selection: $recipe.stepsNumber) {
+                        ForEach(1...5, id: \.self) { rating in
+                            Text("\(rating) Stars").tag(String(rating))
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    
+                }
+                .padding()
             }
         }
         .onDisappear {
@@ -142,6 +173,15 @@ struct RecipeDetail: View {
             adjustedR = 3600 * 4
         }
         startTimer(duration: adjustedR)
+    }
+    
+    private func submitFeedback(comment: String, rating: Int) {
+        // Handle the submission of feedback
+        print("Comment: \(comment), Rating: \(rating) stars")
+        // Reset for the next usage
+        showingInputView = false
+        inputComment = ""
+        inputRating = 0
     }
 
     }
